@@ -203,10 +203,19 @@ canvas.addEventListener("mousedown", function(e){
           //console.log("hi");
           grid[selected[0]][selected[1]].moveTo(x, y);
 		  let pinNum = 0;
+		  let poMo = [];
 		  for(let j = 0; j < pins.length; j++){
-			  if(pins[j].x != -1 && pins[j].y != -1) pinNum++;
+			  if(pins[j].x != -1 && pins[j].y != -1) {
+				  pinNum++;
+				  pins[j].checkMoves();
+				  poMo = poMo.concat(pins[j].canMoveTo);
+				  //console.log(pins[i].canMoveTo);
+			  }
+			  
 		  }
 		  if(pinNum == 1){win();}
+		  console.log(poMo);
+		  if(poMo.length < 1){stuck();}
         }
       }
     }
@@ -218,4 +227,10 @@ function win(){
 	ctx.font = "100px Arial";
 	ctx.fillText("You win!", canvas.width/2, canvas.height/2);
 	ctx.strokeText("You win!", canvas.width/2, canvas.height/2);
+}
+function stuck(){
+	ctx.textAlign = "center";
+	ctx.font = "75px Arial";
+	ctx.fillText("You're stuck", canvas.width/2, canvas.height/2);
+	ctx.strokeText("You're stuck", canvas.width/2, canvas.height/2);
 }
