@@ -214,8 +214,7 @@ canvas.addEventListener("mousedown", function(e){
 			  
 		  }
 		  if(pinNum == 1){win();}
-		  console.log(poMo);
-		  if(poMo.length < 1){stuck();}
+		  else if(poMo.length < 1){stuck();}
         }
       }
     }
